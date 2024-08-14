@@ -1,0 +1,783 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<model name="myofibril" xmlns="http://www.cellml.org/cellml/1.0#" xmlns:cellml="http://www.cellml.org/cellml/1.0#" xmlns:cmeta="http://www.cellml.org/metadata/1.0#">
+    <component name="environment">
+        <variable name="t" public_interface="out" units="millisecond"/>
+    </component>
+    <component name="ATP">
+        <variable initial_value="9670" name="param" units="dimensionless"/>
+        <variable name="intmd" units="dimensionless"/>
+        <variable name="t" public_interface="in" units="millisecond"/>
+        <variable initial_value="9638.08" name="ATP" public_interface="out" units="micromolar"/>
+        <variable name="G_CK" public_interface="in" units="dimensionless"/>
+        <variable name="v_CK" public_interface="in" units="micromolar_per_second"/>
+        <variable name="v_AK" public_interface="in" units="micromolar_per_second"/>
+        <variable name="G_AK" public_interface="in" units="dimensionless"/>
+        <variable name="H_ATP" public_interface="in" units="micromolar_per_second"/>
+        <variable name="G_H" public_interface="in" units="dimensionless"/>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+                <eq/>
+                <apply>
+                    <diff/>
+                    <bvar>
+                        <ci>t</ci>
+                    </bvar>
+                    <ci>ATP</ci>
+                </apply>
+                <apply>
+                    <divide/>
+                    <apply>
+                        <minus/>
+                        <apply>
+                            <plus/>
+                            <apply>
+                                <times/>
+                                <apply>
+                                    <minus/>
+                                    <ci>G_CK</ci>
+                                </apply>
+                                <ci>v_CK</ci>
+                            </apply>
+                            <apply>
+                                <times/>
+                                <ci>G_AK</ci>
+                                <ci>v_AK</ci>
+                            </apply>
+                        </apply>
+                        <apply>
+                            <times/>
+                            <ci>G_H</ci>
+                            <ci>H_ATP</ci>
+                        </apply>
+                    </apply>
+                    <cn cellml:units="dimensionless">1000</cn>
+                </apply>
+            </apply>
+            <apply>
+                <eq/>
+                <ci>intmd</ci>
+                <ci>t</ci>
+            </apply>
+        </math>
+    </component>
+    <component name="ADP">
+        <variable name="t" public_interface="in" units="millisecond"/>
+        <variable initial_value="92.5336" name="ADP" public_interface="out" units="micromolar"/>
+        <variable name="G_CK" public_interface="in" units="dimensionless"/>
+        <variable name="v_CK" public_interface="in" units="micromolar_per_second"/>
+        <variable name="v_AK" public_interface="in" units="micromolar_per_second"/>
+        <variable name="G_AK" public_interface="in" units="dimensionless"/>
+        <variable name="H_ATP" public_interface="in" units="micromolar_per_second"/>
+        <variable name="G_H" public_interface="in" units="dimensionless"/>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+                <eq/>
+                <apply>
+                    <diff/>
+                    <bvar>
+                        <ci>t</ci>
+                    </bvar>
+                    <ci>ADP</ci>
+                </apply>
+                <apply>
+                    <divide/>
+                    <apply>
+                        <plus/>
+                        <apply>
+                            <minus/>
+                            <apply>
+                                <times/>
+                                <ci>G_CK</ci>
+                                <ci>v_CK</ci>
+                            </apply>
+                            <apply>
+                                <times/>
+                                <cn cellml:units="dimensionless">2.0</cn>
+                                <ci>G_AK</ci>
+                                <ci>v_AK</ci>
+                            </apply>
+                        </apply>
+                        <apply>
+                            <times/>
+                            <ci>G_H</ci>
+                            <ci>H_ATP</ci>
+                        </apply>
+                    </apply>
+                    <cn cellml:units="dimensionless">1000</cn>
+                </apply>
+            </apply>
+        </math>
+    </component>
+    <component cmeta:id="AMP" name="AMP">
+        <variable initial_value="6.61147" name="AMP" public_interface="out" units="micromolar"/>
+        <variable name="G_AK" public_interface="in" units="dimensionless"/>
+        <variable name="v_AK" public_interface="in" units="micromolar_per_second"/>
+        <variable name="t" public_interface="in" units="millisecond"/>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+                <eq/>
+                <apply>
+                    <diff/>
+                    <bvar>
+                        <ci>t</ci>
+                    </bvar>
+                    <ci>AMP</ci>
+                </apply>
+                <apply>
+                    <divide/>
+                    <apply>
+                        <times/>
+                        <ci>G_AK</ci>
+                        <ci>v_AK</ci>
+                    </apply>
+                    <cn cellml:units="dimensionless">1000</cn>
+                </apply>
+            </apply>
+        </math>
+    </component>
+    <component cmeta:id="PCr" name="PCr">
+        <variable initial_value="12000.1" name="PCr" public_interface="out" units="micromolar"/>
+        <variable name="G_CK" public_interface="in" units="dimensionless"/>
+        <variable name="v_CK" public_interface="in" units="micromolar_per_second"/>
+        <variable name="t" public_interface="in" units="millisecond"/>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+                <eq/>
+                <apply>
+                    <diff/>
+                    <bvar>
+                        <ci>t</ci>
+                    </bvar>
+                    <ci>PCr</ci>
+                </apply>
+                <apply>
+                    <divide/>
+                    <apply>
+                        <times/>
+                        <ci>G_CK</ci>
+                        <ci>v_CK</ci>
+                    </apply>
+                    <cn cellml:units="dimensionless">1000</cn>
+                </apply>
+            </apply>
+        </math>
+    </component>
+    <component cmeta:id="Cr" name="Cr">
+        <variable initial_value="12000" name="Cr" public_interface="out" units="micromolar"/>
+        <variable name="G_CK" public_interface="in" units="dimensionless"/>
+        <variable name="v_CK" public_interface="in" units="micromolar_per_second"/>
+        <variable name="t" public_interface="in" units="millisecond"/>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+                <eq/>
+                <apply>
+                    <diff/>
+                    <bvar>
+                        <ci>t</ci>
+                    </bvar>
+                    <ci>Cr</ci>
+                </apply>
+                <apply>
+                    <divide/>
+                    <apply>
+                        <times/>
+                        <apply>
+                            <minus/>
+                            <ci>G_CK</ci>
+                        </apply>
+                        <ci>v_CK</ci>
+                    </apply>
+                    <cn cellml:units="dimensionless">1000</cn>
+                </apply>
+            </apply>
+        </math>
+    </component>
+    <component cmeta:id="Pi" name="Pi">
+        <variable initial_value="2341.77" name="Pi" public_interface="out" units="micromolar"/>
+        <variable name="G_H" public_interface="in" units="dimensionless"/>
+        <variable name="H_ATP" public_interface="in" units="micromolar_per_second"/>
+        <variable name="t" public_interface="in" units="millisecond"/>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+                <eq/>
+                <apply>
+                    <diff/>
+                    <bvar>
+                        <ci>t</ci>
+                    </bvar>
+                    <ci>Pi</ci>
+                </apply>
+                <apply>
+                    <divide/>
+                    <apply>
+                        <times/>
+                        <ci>G_H</ci>
+                        <ci>H_ATP</ci>
+                    </apply>
+                    <cn cellml:units="dimensionless">1000</cn>
+                </apply>
+            </apply>
+        </math>
+    </component>
+    <component name="v_CK">
+        <variable name="v_CK" public_interface="out" units="micromolar_per_second"/>
+        <variable initial_value="9.0E2" name="Kia" units="micromolar"/>
+        <variable initial_value="3.49E4" name="Kib" units="micromolar"/>
+        <variable name="Kc" units="micromolar"/>
+        <variable initial_value="1.55E4" name="Kb" units="micromolar"/>
+        <variable initial_value="2.224E2" name="Kic" units="micromolar"/>
+        <variable initial_value="3.49E4" name="KIb" units="micromolar"/>
+        <variable initial_value="4.73E3" name="Kid" units="micromolar"/>
+        <variable initial_value="1.67E3" name="Kd" units="micromolar"/>
+        <variable initial_value="19.84E3" name="V1" units="micromolar_per_second"/>
+        <variable initial_value="84.53E3" name="V11" units="micromolar_per_second"/>
+        <variable name="DenCK" units="dimensionless"/>
+        <variable name="mATP" public_interface="in" units="micromolar"/>
+        <variable name="Cr" public_interface="in" units="micromolar"/>
+        <variable name="PCr" public_interface="in" units="micromolar"/>
+        <variable name="mADP" public_interface="in" units="micromolar"/>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+                <eq/>
+                <ci>v_CK</ci>
+                <apply>
+                    <divide/>
+                    <apply>
+                        <times/>
+                        <cn cellml:units="dimensionless">1.0</cn>
+                        <apply>
+                            <minus/>
+                            <apply>
+                                <divide/>
+                                <apply>
+                                    <times/>
+                                    <ci>V1</ci>
+                                    <ci>mATP</ci>
+                                    <ci>Cr</ci>
+                                </apply>
+                                <apply>
+                                    <times/>
+                                    <ci>Kia</ci>
+                                    <ci>Kb</ci>
+                                </apply>
+                            </apply>
+                            <apply>
+                                <divide/>
+                                <apply>
+                                    <times/>
+                                    <ci>V11</ci>
+                                    <ci>mADP</ci>
+                                    <ci>PCr</ci>
+                                </apply>
+                                <apply>
+                                    <times/>
+                                    <ci>Kic</ci>
+                                    <ci>Kd</ci>
+                                </apply>
+                            </apply>
+                        </apply>
+                    </apply>
+                    <ci>DenCK</ci>
+                </apply>
+            </apply>
+            <apply>
+                <eq/>
+                <ci>DenCK</ci>
+                <apply>
+                    <plus/>
+                    <cn cellml:units="dimensionless">1.0</cn>
+                    <apply>
+                        <divide/>
+                        <ci>Cr</ci>
+                        <ci>Kib</ci>
+                    </apply>
+                    <apply>
+                        <divide/>
+                        <ci>PCr</ci>
+                        <ci>Kid</ci>
+                    </apply>
+                    <apply>
+                        <times/>
+                        <ci>mATP</ci>
+                        <apply>
+                            <plus/>
+                            <apply>
+                                <divide/>
+                                <cn cellml:units="dimensionless">1.0</cn>
+                                <ci>Kia</ci>
+                            </apply>
+                            <apply>
+                                <divide/>
+                                <ci>Cr</ci>
+                                <apply>
+                                    <times/>
+                                    <ci>Kia</ci>
+                                    <ci>Kb</ci>
+                                </apply>
+                            </apply>
+                        </apply>
+                    </apply>
+                    <apply>
+                        <times/>
+                        <ci>mADP</ci>
+                        <apply>
+                            <plus/>
+                            <apply>
+                                <divide/>
+                                <cn cellml:units="dimensionless">1.0</cn>
+                                <ci>Kic</ci>
+                            </apply>
+                            <apply>
+                                <divide/>
+                                <ci>PCr</ci>
+                                <apply>
+                                    <times/>
+                                    <ci>Kid</ci>
+                                    <ci>Kc</ci>
+                                </apply>
+                            </apply>
+                            <apply>
+                                <divide/>
+                                <ci>Cr</ci>
+                                <apply>
+                                    <times/>
+                                    <ci>Kic</ci>
+                                    <ci>KIb</ci>
+                                </apply>
+                            </apply>
+                        </apply>
+                    </apply>
+                </apply>
+            </apply>
+            <apply>
+                <eq/>
+                <ci>Kc</ci>
+                <apply>
+                    <divide/>
+                    <apply>
+                        <times/>
+                        <ci>Kic</ci>
+                        <ci>Kd</ci>
+                    </apply>
+                    <ci>Kid</ci>
+                </apply>
+            </apply>
+        </math>
+    </component>
+    <component name="v_AK">
+        <variable name="v_AK" public_interface="out" units="micromolar_per_second"/>
+        <variable initial_value="63.8" name="kfa" units="second_order_rate_constant"/>
+        <variable initial_value="1.68" name="kba" units="second_order_rate_constant"/>
+        <variable name="fADP" public_interface="in" units="micromolar"/>
+        <variable name="mATP" public_interface="in" units="micromolar"/>
+        <variable name="AMP" public_interface="in" units="micromolar"/>
+        <variable name="mADP" public_interface="in" units="micromolar"/>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+                <eq/>
+                <ci>v_AK</ci>
+                <apply>
+                    <minus/>
+                    <apply>
+                        <times/>
+                        <ci>kfa</ci>
+                        <ci>fADP</ci>
+                        <ci>mADP</ci>
+                    </apply>
+                    <apply>
+                        <times/>
+                        <ci>kba</ci>
+                        <ci>mATP</ci>
+                        <ci>AMP</ci>
+                    </apply>
+                </apply>
+            </apply>
+        </math>
+    </component>
+    <component cmeta:id="G_CK" name="G_CK">
+        <variable name="G_CK" public_interface="out" units="dimensionless"/>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+                <eq/>
+                <ci>G_CK</ci>
+                <cn cellml:units="dimensionless">1</cn>
+            </apply>
+        </math>
+    </component>
+    <component cmeta:id="G_AK" name="G_AK">
+        <variable name="G_AK" public_interface="out" units="dimensionless"/>
+        <variable name="G_CK" public_interface="in" units="dimensionless"/>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+                <eq/>
+                <ci>G_AK</ci>
+                <ci>G_CK</ci>
+            </apply>
+        </math>
+    </component>
+    <component cmeta:id="G_H" name="G_H">
+        <variable name="G_H" public_interface="out" units="dimensionless"/>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+                <eq/>
+                <ci>G_H</ci>
+                <cn cellml:units="dimensionless">1</cn>
+            </apply>
+        </math>
+    </component>
+    <component cmeta:id="H_ATP" name="H_ATP">
+        <variable name="H_ATP" public_interface="out" units="micromolar_per_second"/>
+        <variable name="H_ATPmax" units="micromolar_per_second"/>
+        <variable name="t" public_interface="in" units="millisecond"/>
+        <variable initial_value="30" name="t1" units="millisecond"/>
+        <variable initial_value="60" name="t2" units="millisecond"/>
+        <variable initial_value="180" name="t3" units="millisecond"/>
+        <variable initial_value="100000" name="ttt" units="millisecond"/>
+        <variable name="ATP" public_interface="in" units="micromolar"/>
+        <variable name="ADP" public_interface="in" units="micromolar"/>
+        <variable name="Pi" public_interface="in" units="micromolar"/>
+        <variable initial_value="0.065800" name="R" units="micromolar"/>
+        <variable name="J_ATPase" units="micromolar_per_second"/>
+        <variable initial_value="0.01" name="X_ATPase" units="micromolar_per_second"/>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+                <eq/>
+                <ci>J_ATPase</ci>
+                <apply>
+                    <divide/>
+                    <ci>X_ATPase</ci>
+                    <apply>
+                        <plus/>
+                        <cn cellml:units="dimensionless">1</cn>
+                        <apply>
+                            <divide/>
+                            <apply>
+                                <times/>
+                                <ci>R</ci>
+                                <ci>Pi</ci>
+                                <ci>ADP</ci>
+                            </apply>
+                            <ci>ATP</ci>
+                        </apply>
+                    </apply>
+                </apply>
+            </apply>
+            <apply>
+                <eq/>
+                <ci>H_ATPmax</ci>
+                <apply>
+                    <times/>
+                    <ci>J_ATPase</ci>
+                    <cn cellml:units="dimensionless">1000000</cn>
+                </apply>
+            </apply>
+            <apply>
+                <eq/>
+                <ci>H_ATP</ci>
+                <ci>H_ATPmax</ci>
+            </apply>
+        </math>
+    </component>
+    <component cmeta:id="fATP" name="fATP">
+        <variable name="fATP" public_interface="out" units="micromolar"/>
+        <variable initial_value="24.0" name="KDT" units="micromolar"/>
+        <variable name="ATP" public_interface="in" units="micromolar"/>
+        <variable name="Mg" public_interface="in" units="micromolar"/>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+                <eq/>
+                <ci>fATP</ci>
+                <apply>
+                    <divide/>
+                    <ci>ATP</ci>
+                    <apply>
+                        <plus/>
+                        <cn cellml:units="dimensionless">1.0</cn>
+                        <apply>
+                            <divide/>
+                            <ci>Mg</ci>
+                            <ci>KDT</ci>
+                        </apply>
+                    </apply>
+                </apply>
+            </apply>
+        </math>
+    </component>
+    <component cmeta:id="mATP" name="mATP">
+        <variable name="mATP" public_interface="out" units="micromolar"/>
+        <variable name="ATP" public_interface="in" units="micromolar"/>
+        <variable name="fATP" public_interface="in" units="micromolar"/>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+                <eq/>
+                <ci>mATP</ci>
+                <apply>
+                    <minus/>
+                    <ci>ATP</ci>
+                    <ci>fATP</ci>
+                </apply>
+            </apply>
+        </math>
+    </component>
+    <component cmeta:id="fADP" name="fADP">
+        <variable name="fADP" public_interface="out" units="micromolar"/>
+        <variable initial_value="347.0" name="KDD" units="micromolar"/>
+        <variable name="ADP" public_interface="in" units="micromolar"/>
+        <variable name="Mg" public_interface="in" units="micromolar"/>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+                <eq/>
+                <ci>fADP</ci>
+                <apply>
+                    <divide/>
+                    <ci>ADP</ci>
+                    <apply>
+                        <plus/>
+                        <cn cellml:units="dimensionless">1.0</cn>
+                        <apply>
+                            <divide/>
+                            <ci>Mg</ci>
+                            <ci>KDD</ci>
+                        </apply>
+                    </apply>
+                </apply>
+            </apply>
+        </math>
+    </component>
+    <component cmeta:id="mADP" name="mADP">
+        <variable name="mADP" public_interface="out" units="micromolar"/>
+        <variable name="ADP" public_interface="in" units="micromolar"/>
+        <variable name="fADP" public_interface="in" units="micromolar"/>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+                <eq/>
+                <ci>mADP</ci>
+                <apply>
+                    <minus/>
+                    <ci>ADP</ci>
+                    <ci>fADP</ci>
+                </apply>
+            </apply>
+        </math>
+    </component>
+    <component name="Mg_buffering">
+        <variable initial_value="1.0E3" name="Mgext" public_interface="out" units="micromolar"/>
+        <variable initial_value="380.0" name="Mgx" public_interface="out" units="micromolar"/>
+    </component>
+    <connection>
+        <map_components component_1="ATP" component_2="v_AK"/>
+        <map_variables variable_1="v_AK" variable_2="v_AK"/>
+    </connection>
+    <connection>
+        <map_components component_1="ATP" component_2="G_AK"/>
+        <map_variables variable_1="G_AK" variable_2="G_AK"/>
+    </connection>
+    <connection>
+        <map_components component_1="ATP" component_2="G_CK"/>
+        <map_variables variable_1="G_CK" variable_2="G_CK"/>
+    </connection>
+    <connection>
+        <map_components component_1="ATP" component_2="v_CK"/>
+        <map_variables variable_1="v_CK" variable_2="v_CK"/>
+    </connection>
+    <connection>
+        <map_components component_1="ATP" component_2="G_H"/>
+        <map_variables variable_1="G_H" variable_2="G_H"/>
+    </connection>
+    <connection>
+        <map_components component_1="ATP" component_2="H_ATP"/>
+        <map_variables variable_1="H_ATP" variable_2="H_ATP"/>
+        <map_variables variable_1="ATP" variable_2="ATP"/>
+    </connection>
+    <connection>
+        <map_components component_1="ADP" component_2="v_AK"/>
+        <map_variables variable_1="v_AK" variable_2="v_AK"/>
+    </connection>
+    <connection>
+        <map_components component_1="ADP" component_2="G_AK"/>
+        <map_variables variable_1="G_AK" variable_2="G_AK"/>
+    </connection>
+    <connection>
+        <map_components component_1="ADP" component_2="G_CK"/>
+        <map_variables variable_1="G_CK" variable_2="G_CK"/>
+    </connection>
+    <connection>
+        <map_components component_1="ADP" component_2="v_CK"/>
+        <map_variables variable_1="v_CK" variable_2="v_CK"/>
+    </connection>
+    <connection>
+        <map_components component_1="G_AK" component_2="G_CK"/>
+        <map_variables variable_1="G_CK" variable_2="G_CK"/>
+    </connection>
+    <connection>
+        <map_components component_1="ADP" component_2="G_H"/>
+        <map_variables variable_1="G_H" variable_2="G_H"/>
+    </connection>
+    <connection>
+        <map_components component_1="ADP" component_2="H_ATP"/>
+        <map_variables variable_1="H_ATP" variable_2="H_ATP"/>
+        <map_variables variable_1="ADP" variable_2="ADP"/>
+    </connection>
+    <connection>
+        <map_components component_1="AMP" component_2="G_AK"/>
+        <map_variables variable_1="G_AK" variable_2="G_AK"/>
+    </connection>
+    <connection>
+        <map_components component_1="AMP" component_2="v_AK"/>
+        <map_variables variable_1="v_AK" variable_2="v_AK"/>
+        <map_variables variable_1="AMP" variable_2="AMP"/>
+    </connection>
+    <connection>
+        <map_components component_1="PCr" component_2="G_CK"/>
+        <map_variables variable_1="G_CK" variable_2="G_CK"/>
+    </connection>
+    <connection>
+        <map_components component_1="PCr" component_2="v_CK"/>
+        <map_variables variable_1="v_CK" variable_2="v_CK"/>
+        <map_variables variable_1="PCr" variable_2="PCr"/>
+    </connection>
+    <connection>
+        <map_components component_1="Cr" component_2="G_CK"/>
+        <map_variables variable_1="G_CK" variable_2="G_CK"/>
+    </connection>
+    <connection>
+        <map_components component_1="Cr" component_2="v_CK"/>
+        <map_variables variable_1="v_CK" variable_2="v_CK"/>
+        <map_variables variable_1="Cr" variable_2="Cr"/>
+    </connection>
+    <connection>
+        <map_components component_1="Pi" component_2="G_H"/>
+        <map_variables variable_1="G_H" variable_2="G_H"/>
+    </connection>
+    <connection>
+        <map_components component_1="Pi" component_2="H_ATP"/>
+        <map_variables variable_1="H_ATP" variable_2="H_ATP"/>
+        <map_variables variable_1="Pi" variable_2="Pi"/>
+    </connection>
+    <connection>
+        <map_components component_1="v_CK" component_2="mADP"/>
+        <map_variables variable_1="mADP" variable_2="mADP"/>
+    </connection>
+    <connection>
+        <map_components component_1="v_CK" component_2="mATP"/>
+        <map_variables variable_1="mATP" variable_2="mATP"/>
+    </connection>
+    <connection>
+        <map_components component_1="v_AK" component_2="fADP"/>
+        <map_variables variable_1="fADP" variable_2="fADP"/>
+    </connection>
+    <connection>
+        <map_components component_1="v_AK" component_2="mADP"/>
+        <map_variables variable_1="mADP" variable_2="mADP"/>
+    </connection>
+    <connection>
+        <map_components component_1="v_AK" component_2="mATP"/>
+        <map_variables variable_1="mATP" variable_2="mATP"/>
+    </connection>
+    <connection>
+        <map_components component_1="fATP" component_2="Mg_buffering"/>
+        <map_variables variable_1="Mg" variable_2="Mgext"/>
+    </connection>
+    <connection>
+        <map_components component_1="fATP" component_2="ATP"/>
+        <map_variables variable_1="ATP" variable_2="ATP"/>
+    </connection>
+    <connection>
+        <map_components component_1="mATP" component_2="fATP"/>
+        <map_variables variable_1="fATP" variable_2="fATP"/>
+    </connection>
+    <connection>
+        <map_components component_1="mATP" component_2="ATP"/>
+        <map_variables variable_1="ATP" variable_2="ATP"/>
+    </connection>
+    <connection>
+        <map_components component_1="fADP" component_2="Mg_buffering"/>
+        <map_variables variable_1="Mg" variable_2="Mgext"/>
+    </connection>
+    <connection>
+        <map_components component_1="fADP" component_2="ADP"/>
+        <map_variables variable_1="ADP" variable_2="ADP"/>
+    </connection>
+    <connection>
+        <map_components component_1="mADP" component_2="fADP"/>
+        <map_variables variable_1="fADP" variable_2="fADP"/>
+    </connection>
+    <connection>
+        <map_components component_1="mADP" component_2="ADP"/>
+        <map_variables variable_1="ADP" variable_2="ADP"/>
+    </connection>
+    <connection>
+        <map_components component_1="environment" component_2="ATP"/>
+        <map_variables variable_1="t" variable_2="t"/>
+    </connection>
+    <connection>
+        <map_components component_1="environment" component_2="ADP"/>
+        <map_variables variable_1="t" variable_2="t"/>
+    </connection>
+    <connection>
+        <map_components component_1="environment" component_2="AMP"/>
+        <map_variables variable_1="t" variable_2="t"/>
+    </connection>
+    <connection>
+        <map_components component_1="environment" component_2="H_ATP"/>
+        <map_variables variable_1="t" variable_2="t"/>
+    </connection>
+    <connection>
+        <map_components component_1="environment" component_2="PCr"/>
+        <map_variables variable_1="t" variable_2="t"/>
+    </connection>
+    <connection>
+        <map_components component_1="environment" component_2="Cr"/>
+        <map_variables variable_1="t" variable_2="t"/>
+    </connection>
+    <connection>
+        <map_components component_1="environment" component_2="Pi"/>
+        <map_variables variable_1="t" variable_2="t"/>
+    </connection>
+    <units name="millisecond">
+        <unit prefix="milli" units="second"/>
+    </units>
+    <units name="molar">
+        <unit units="mole"/>
+        <unit exponent="-1" units="litre"/>
+    </units>
+    <units name="micromolar">
+        <unit prefix="micro" units="mole"/>
+        <unit exponent="-1" units="litre"/>
+    </units>
+    <units name="micrometre">
+        <unit prefix="micro" units="metre"/>
+    </units>
+    <units name="micrometre_per_s">
+        <unit units="micrometre"/>
+        <unit exponent="-1" units="second"/>
+    </units>
+    <units name="millivolt">
+        <unit prefix="milli" units="volt"/>
+    </units>
+    <units name="per_millivolt">
+        <unit exponent="-1" units="millivolt"/>
+    </units>
+    <units name="micromolar_per_second">
+        <unit units="micromolar"/>
+        <unit exponent="-1" units="second"/>
+    </units>
+    <units name="second_order_rate_constant">
+        <unit exponent="-1" units="micromolar"/>
+        <unit exponent="-1" units="second"/>
+    </units>
+    <units name="kilojoule_per_mole">
+        <unit prefix="kilo" units="joule"/>
+        <unit exponent="-1" units="mole"/>
+    </units>
+    <units name="kilojoule_per_mole_kelvin">
+        <unit prefix="kilo" units="joule"/>
+        <unit exponent="-1" units="mole"/>
+        <unit exponent="-1" units="kelvin"/>
+    </units>
+    <units name="kilojoule_per_mole_millivolt">
+        <unit prefix="kilo" units="joule"/>
+        <unit exponent="-1" units="mole"/>
+        <unit exponent="-1" units="millivolt"/>
+    </units>
+</model>

@@ -1,0 +1,23 @@
+1C3_5.py contains the original, base code for simulating mitochondrial OXPHOS and subsequent metabolite exchange between mitochondria and myofibrils. 
+
+present_glyco.py contains 1C3_5.py code, but with an addition to treat glycogen as a barrier to diffusion (line 335 first instance: 'If node is glyco, make diffusion constant for metabolite = 0). Note, value of 0 for diffusion caused unforeseen issues, making it near zero may be more appropriate.
+
+absent_glyco.py contains approximately same code as 1C3_5.py code, but is meant to be ran in comparison to present_glyco.py
+
+The simulation uses reaction diffusion equations to model the diffusion of metabolites over a realistic FE mesh dervied from electron microsocpy images.
+
+The required application/packages to run this are: openCMISS and associated libraries - www.opencmiss.org
+
+Outputs are given as TIME_STEP_SPEC_#.part00.25000.exnode
+where for # 
+1 = ATP
+2 = ADP
+3 = AMP
+4 = PCr
+5 = Cr
+6 = Pi
+7 = Oxy
+
+part00 changes if you attempt to parallelize one mesh/simulation over multiple cores but as of August 2024 this code only worked in serial.
+
+'25000' is the time-step for the data you are viewing. Change this as needed.

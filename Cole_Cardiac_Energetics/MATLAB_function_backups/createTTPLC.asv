@@ -1,0 +1,80 @@
+function [total_edges, TT_nodes, TT_labels, TT_edges, holes] = createTTPLC(tt_bin, total_edges, spatres)
+%CREATETTPLC Creates PLC for the TT region
+%
+%   Args:
+%   - tt_bin, MxN logical -- binarised image of the region to analyse.
+%   - total_edges, double -- number of edges.
+%   - spatres, double -- spatial resolution.
+%
+%   Returns:
+%   - total_edges, double -- number of edges and number of edges for the region.
+%   - TT_nodes, Kx2 double -- coordinates of nodes for the region.
+%   - TT_labels, Kx2 double -- labels for the nodes of the region.
+%   - TT_edges, Kx2 double -- coordinates of edges for the region.
+%   - holes, Kx2 double -- number of holes for the region.
+holes = [];
+TT_labels = [];
+TT_nodes = [];
+TT_edges = [];
+se =  strel('disk',4);
+% If you see ERROR: Blank / No mesh : hole has been placed outside a TT
+% Try increasing the se value to 10
+
+%These following lines are purely for debugging and visualizing. Comment
+%out when not in use
+% Display the binary image
+figure;
+imshow(TT1);
+
+%This should smooth out the edges of the structures
+TT1 = imerode(tt_bin,se);
+disp()
+TT1 = bwareaopen(TT1,5000); %Para 2
+
+tt_bin = imdilate(TT1,se);
+
+%add a border
+tt_bin (1:size(tt_bin,1),1:2) = 0;
+tt_bin (1:size(tt_bin,1),size(tt_bin,2)-1:size(tt_bin,2)) = 0;
+tt_bin (1:2,1:size(tt_bin,2)) = 0;
+tt_bin (size(tt_bin,1)-1:size(tt_bin,1),1:size(tt_bin,2)) = 0;
+
+[TT_labelled,TT_nums] = bwlabel(tt_bin,8);
+
+
+for label = 1:TT_nums
+    [r,c] = find(TT_labelled==label);   %find row and columns beloonging to label
+    tt = bwselect(TT_labelled,c,r,8);
+    tt = imfill(tt,'holes');
+    TT_boundary = edge(tt,'log','thinning');
+    [TT_edgelist,~] = edgelink(TT_boundary);
+    TT_edgepoints = cell2mat(TT_edgelist(1,1));
+    TT_edgepoints = TT_edgepoints(1:end-1,:);
+    TT_edgepoints_spatcoor = (TT_edgepoints-ones(size(TT_edgepoints)))*spatres;
+
+    %add mitochondrial edges to edges list
+    %%%% MROE734 EDITS removed useless for loop and replaced with vectors
+    tmp_edges = ((total_edges+1):(total_edges+size(TT_edgepoints,1)))';
+    edges = [tmp_edges, tmp_edges, tmp_edges+1];
+    edges(end,3) = total_edges+1;
+    TT_edges = [TT_edges; edges];    
+    total_edges = total_edges+size(TT_edgepoints,1);
+    %%%% MROE734 EDITS renamed all_nodes and all_labels for clarity
+    TT_nodes = [TT_nodes;TT_edgepoints_spatcoor];
+    TT_labels = [TT_labels;label*ones(size(TT_edgepoints_spatcoor))];
+
+    se =  strel('disk',1);  %% Para 3
+    BW = imerode(tt,se);
+    [r,c] = find(BW);
+
+    % Check if there are any points found
+    if ~isempty(r) && ~isempty(c)
+        pixel = [r(round(size(r, 1) / 2)), c(round(size(c, 1) / 2))];
+        points = (pixel - ones(size(pixel))) * spatres;
+        holes = [holes; points];
+    else
+        % Handle the case where no points are found (e.g., set a default value)
+        % You might want to add specific handling based on your requirements
+        disp('No points found.');
+    end
+end

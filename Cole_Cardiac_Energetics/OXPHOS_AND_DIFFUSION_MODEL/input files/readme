@@ -1,0 +1,13 @@
+# MESH FILES
+
+1C3_5.1.ele and 1C3_5.1.node files contain a description of the input mesh geometry of cell 1C3_5.
+These were used as input to the source code (1C3_5.py) and were generated using the trinagle mesh generator.
+
+# CELLML FILES
+
+mitochondria_new.cellml contains the ODEs describing mitochondrial OXPHOS reactions.
+myofibril_new.cellml contains the ODEs describing myofibrillar reactions.
+
+# INITIAL CONDITIONS
+
+inputs.txt containts the diffusivity values and intial micromolar concentrations of the metabolites simulated in the model.
